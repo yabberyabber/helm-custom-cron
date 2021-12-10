@@ -1,0 +1,135 @@
+---
+# Source: custom-cron/templates/cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: custom-custom-cron
+  labels:
+    helm.sh/chart: custom-cron-0.1.0
+    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: custom-cron
+    app.kubernetes.io/instance: custom
+    app.kubernetes.io/component: main
+spec:
+  schedule: "0 0 * * *"
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 5
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        metadata:
+          labels:
+            helm.sh/chart: custom-cron-0.1.0
+            app.kubernetes.io/version: "1.0"
+            app.kubernetes.io/managed-by: Helm
+            app.kubernetes.io/name: custom-cron
+            app.kubernetes.io/instance: custom
+            app.kubernetes.io/component: main
+        spec:
+          serviceAccountName: default
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 33
+          affinity:
+            {}
+          restartPolicy: Never
+          initContainers:
+            - name: aa
+              securityContext:
+                runAsNonRoot: true
+                runAsUser: 33
+              image: "camptocamp/custom-aa:latest"
+              imagePullPolicy: IfNotPresent
+              env:
+                  - name: "TEST"
+                    value: "aa"
+              terminationMessagePolicy: FallbackToLogsOnError
+              resources:
+                limits:
+                  cpu: 100m
+                  memory: 50Mi
+                requests:
+                  cpu: 100m
+                  memory: 50Mi
+              command:
+                - sleep
+                - "3600"
+            - name: bb
+              securityContext:
+                runAsNonRoot: true
+                runAsUser: 33
+              image: "camptocamp/custom-bb:latest"
+              imagePullPolicy: IfNotPresent
+              terminationMessagePolicy: FallbackToLogsOnError
+              resources:
+                null
+              args:
+                - sleep
+                - "3600"
+              volumeMounts:
+                - mountPath: /tmp/my-volume
+                  name: my-volume
+          containers:
+            - name: cc
+              securityContext:
+                runAsNonRoot: true
+                runAsUser: 33
+              image: "camptocamp/custom-aa:latest"
+              imagePullPolicy: IfNotPresent
+              env:
+                  - name: "TEST"
+                    value: "aa"
+              terminationMessagePolicy: FallbackToLogsOnError
+              resources:
+                limits:
+                  cpu: 100m
+                  memory: 50Mi
+                requests:
+                  cpu: 100m
+                  memory: 50Mi
+              command:
+                - sleep
+                - "3600"
+            - name: dd
+              securityContext:
+                runAsNonRoot: true
+                runAsUser: 33
+              image: "camptocamp/custom-bb:latest"
+              imagePullPolicy: IfNotPresent
+              terminationMessagePolicy: FallbackToLogsOnError
+              resources:
+                null
+              args:
+                - sleep
+                - "3600"
+              volumeMounts:
+                - mountPath: /tmp/my-volume
+                  name: my-volume
+              ports:
+                - containerPort: 8080
+                  name: http
+                  protocol: TCP
+              livenessProbe:
+                httpGet:
+                  path: /
+                  port: http
+              readinessProbe:
+                httpGet:
+                  path: /
+                  port: http
+                initialDelaySeconds: 5
+                periodSeconds: 20
+                timeoutSeconds: 10
+              startupProbe:
+                httpGet:
+                  path: /
+                  port: http
+                initialDelaySeconds: 5
+                periodSeconds: 20
+                timeoutSeconds: 10
+          volumes:
+          - emptyDir: {}
+            name: my-volume

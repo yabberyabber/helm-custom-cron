@@ -1,0 +1,75 @@
+{{- if semverCompare ">=1.21.0" ( trimPrefix "v" .Capabilities.KubeVersion.Version ) }}
+apiVersion: batch/v1
+{{- else -}}
+apiVersion: batch/v1beta1
+{{- end }}
+kind: CronJob
+metadata:
+  name: {{ include "common.fullname" ( dict "root" . "service" .Values ) }}
+  labels: {{ include "common.labels" ( dict "root" . "service" .Values ) | nindent 4 }}
+spec:
+  schedule: {{ .Values.schedule | quote }}
+  successfulJobsHistoryLimit: {{ .Values.successfulJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ .Values.failedJobsHistoryLimit }}
+  concurrencyPolicy: {{ .Values.concurrencyPolicy }}
+  jobTemplate:
+    spec:
+      backoffLimit: {{ .Values.backoffLimit }}
+      template:
+        metadata:
+          labels: {{ include "common.labels" ( dict "root" . "service" .Values ) | nindent 12 }}
+        spec: {{- include "common.podConfig" ( dict "root" . "service" .Values ) | indent 10 }}
+          restartPolicy: {{ .Values.restartPolicy }}
+          {{- if .Values.initContainers }}
+          initContainers:
+          {{- range $name, $config := .Values.initContainers }}
+            - name: {{ $name }}
+              {{- include "common.containerConfig" ( dict "root" $ "container" $config ) | nindent 14 }}
+              {{- with $config.command }}
+              command: {{ $config.command | toYaml | nindent 16 }}
+              {{- end }}
+              {{- with $config.args }}
+              args: {{ $config.args | toYaml | nindent 16 }}
+              {{- end }}
+              {{- with $config.volumeMounts }}
+              volumeMounts: {{ $config.volumeMounts | toYaml | nindent 16 }}
+              {{- end }}
+          {{- end }}
+          {{- end }}
+          containers:
+          {{- range $name, $config := .Values.containers }}
+            - name: {{ $name }}
+              {{- include "common.containerConfig" ( dict "root" $ "container" $config ) | nindent 14 }}
+              {{- with $config.command }}
+              command:
+                {{- . | toYaml | nindent 16 }}
+              {{- end }}
+              {{- with $config.args }}
+              args:
+                {{- . | toYaml | nindent 16 }}
+              {{- end }}
+              {{- with $config.volumeMounts }}
+              volumeMounts:
+                {{- . | toYaml | nindent 16 }}
+              {{- end }}
+              {{- with $config.ports }}
+              ports:
+                {{- $config.ports | toYaml | nindent 16 }}
+              {{- end }}
+              {{- with $config.livenessProbe }}
+              livenessProbe:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              {{- with $config.readinessProbe }}
+              readinessProbe:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              {{- with $config.readinessProbe }}
+              startupProbe:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+          {{- end }}
+          {{- with .Values.volumes }}
+          volumes:
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
