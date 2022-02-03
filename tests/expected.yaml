@@ -22,9 +22,6 @@ spec:
       template:
         metadata:
           labels:
-            helm.sh/chart: custom-cron-0.1.0
-            app.kubernetes.io/version: "1.0"
-            app.kubernetes.io/managed-by: Helm
             app.kubernetes.io/name: custom-cron
             app.kubernetes.io/instance: custom
             app.kubernetes.io/component: main
