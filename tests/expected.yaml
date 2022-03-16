@@ -5,7 +5,7 @@ kind: CronJob
 metadata:
   name: custom-custom-cron
   labels:
-    helm.sh/chart: custom-cron-0.1.0
+    helm.sh/chart: custom-cron
     app.kubernetes.io/version: "1.0"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: custom-cron
@@ -41,8 +41,8 @@ spec:
               image: "camptocamp/custom-aa:latest"
               imagePullPolicy: IfNotPresent
               env:
-                  - name: "TEST"
-                    value: "aa"
+                - name: "TEST"
+                  value: "aa"
               terminationMessagePolicy: FallbackToLogsOnError
               resources:
                 limits:
@@ -77,8 +77,8 @@ spec:
               image: "camptocamp/custom-aa:latest"
               imagePullPolicy: IfNotPresent
               env:
-                  - name: "TEST"
-                    value: "aa"
+                - name: "TEST"
+                  value: "aa"
               terminationMessagePolicy: FallbackToLogsOnError
               resources:
                 limits:

@@ -6,11 +6,7 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: {{ include "common.fullname" ( dict "root" . "service" .Values ) }}
-  labels: {{ include "common.labels" ( dict "root" . "service" .Values ) | nindent 4 }}
-  {{- with .Values.annotations }}
-  annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+  {{- include "common.metadata" ( dict "root" . "service" .Values ) | nindent 2 }}
 spec:
   schedule: {{ .Values.schedule | quote }}
   successfulJobsHistoryLimit: {{ .Values.successfulJobsHistoryLimit }}
@@ -20,13 +16,9 @@ spec:
     spec:
       backoffLimit: {{ .Values.backoffLimit }}
       template:
-        metadata:
-          labels: {{ include "common.selectorLabels" ( dict "root" . "service" .Values ) | nindent 12 }}
-          {{- with .Values.podAnnotations }}
-          annotations:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-        spec: {{- include "common.podConfig" ( dict "root" . "service" .Values ) | indent 10 }}
+        metadata: {{- include "common.podMetadata" ( dict "root" . "service" .Values ) | nindent 10 }}
+        spec:
+          {{- include "common.podConfig" ( dict "root" . "service" .Values ) | nindent 10 }}
           restartPolicy: {{ .Values.restartPolicy }}
           {{- if .Values.initContainers }}
           initContainers:
