@@ -1,13 +1,14 @@
+global:
+  image:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+  # ConfigMap or secret from env name override
+  configMapNameOverride: {}
+
 nameOverride: ''
 fullnameOverride: ''
 
-imagePullSecrets: []
 replicaCount: 1
-image:
-  pullPolicy: IfNotPresent
-
-# ConfigMap or secret from env name override
-configMapNameOverride: {}
 
 initContainers: {}
 containers: {}
