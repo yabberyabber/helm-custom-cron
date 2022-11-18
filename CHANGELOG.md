@@ -1,5 +1,45 @@
 # Changelog
 
+## [0.3.0](https://github.com/camptocamp/helm-custom-cron/tree/0.3.0) (2022-11-14)
+
+[Full Changelog](https://github.com/camptocamp/helm-custom-cron/compare/0.2.0...0.3.0)
+
+#### :books: Documentation
+
+- Add generated changelog [\#51](https://github.com/camptocamp/helm-custom-cron/pull/51) ([sbrunner](https://github.com/sbrunner))
+
+#### :wrench: Build, CI, Tests, Code style
+
+- Fix repository in workflow used to delete old workflow runs [\#67](https://github.com/camptocamp/helm-custom-cron/pull/67) ([sbrunner](https://github.com/sbrunner))
+- Add workflow to delete old workflow runs [\#66](https://github.com/camptocamp/helm-custom-cron/pull/66) ([sbrunner](https://github.com/sbrunner))
+- Use the standard name for pull request checks workflow [\#65](https://github.com/camptocamp/helm-custom-cron/pull/65) ([sbrunner](https://github.com/sbrunner))
+- Fix the get config in changelog workflow [\#63](https://github.com/camptocamp/helm-custom-cron/pull/63) ([sbrunner](https://github.com/sbrunner))
+- Schedule Renovate on early Saturday [\#60](https://github.com/camptocamp/helm-custom-cron/pull/60) ([sbrunner](https://github.com/sbrunner))
+- Fix the changelog generator workflow [\#58](https://github.com/camptocamp/helm-custom-cron/pull/58) ([sbrunner](https://github.com/sbrunner))
+- Clean all the images already present in the image given by GitHub [\#57](https://github.com/camptocamp/helm-custom-cron/pull/57) ([sbrunner](https://github.com/sbrunner))
+- Update the changelog generation workflow [\#56](https://github.com/camptocamp/helm-custom-cron/pull/56) ([sbrunner](https://github.com/sbrunner))
+- Remove Dependabot configuration [\#55](https://github.com/camptocamp/helm-custom-cron/pull/55) ([sbrunner](https://github.com/sbrunner))
+- Update the changelog [\#52](https://github.com/camptocamp/helm-custom-cron/pull/52) ([github-actions[bot]](https://github.com/apps/github-actions))
+- Configure Renovate [\#46](https://github.com/camptocamp/helm-custom-cron/pull/46) ([sbrunner](https://github.com/sbrunner))
+- Test with used Helm version [\#31](https://github.com/camptocamp/helm-custom-cron/pull/31) ([sbrunner](https://github.com/sbrunner))
+
+#### :package: Dependencies update
+
+- Update Helm release common to v0.3.0 [\#69](https://github.com/camptocamp/helm-custom-cron/pull/69) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency c2cciutils to v1.3.11 [\#68](https://github.com/camptocamp/helm-custom-cron/pull/68) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency c2cciutils to v1.3.2 [\#62](https://github.com/camptocamp/helm-custom-cron/pull/62) ([renovate[bot]](https://github.com/apps/renovate))
+- Update azure/setup-helm action to v3 [\#59](https://github.com/camptocamp/helm-custom-cron/pull/59) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency c2cciutils to v1.2.1 [\#54](https://github.com/camptocamp/helm-custom-cron/pull/54) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency c2cciutils to v1.2.0 [\#49](https://github.com/camptocamp/helm-custom-cron/pull/49) ([renovate[bot]](https://github.com/apps/renovate))
+- Update dependency c2cciutils to v1.2.dev20220620100308 [\#48](https://github.com/camptocamp/helm-custom-cron/pull/48) ([renovate[bot]](https://github.com/apps/renovate))
+- Update all patch versions [\#47](https://github.com/camptocamp/helm-custom-cron/pull/47) ([renovate[bot]](https://github.com/apps/renovate))
+- Bump c2cciutils from 1.2.dev20220527115520 to 1.2.dev20220607092206 in /ci [\#45](https://github.com/camptocamp/helm-custom-cron/pull/45) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump c2cciutils from 1.2.dev20220509122615 to 1.2.dev20220527115520 in /ci [\#42](https://github.com/camptocamp/helm-custom-cron/pull/42) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump c2cciutils from 1.2.dev20220506093925 to 1.2.dev20220509122615 in /ci [\#39](https://github.com/camptocamp/helm-custom-cron/pull/39) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump c2cciutils from 1.2.dev20220414132101 to 1.2.dev20220506093925 in /ci [\#37](https://github.com/camptocamp/helm-custom-cron/pull/37) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump c2cciutils from 1.2.dev20220331120018 to 1.2.dev20220414132101 in /ci [\#35](https://github.com/camptocamp/helm-custom-cron/pull/35) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump c2cciutils from 1.2.dev20220317100006 to 1.2.dev20220331120018 in /ci [\#33](https://github.com/camptocamp/helm-custom-cron/pull/33) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [0.2.0](https://github.com/camptocamp/helm-custom-cron/tree/0.2.0) (2022-03-21)
 
 [Full Changelog](https://github.com/camptocamp/helm-custom-cron/compare/0.1.2...0.2.0)
