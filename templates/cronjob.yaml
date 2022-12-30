@@ -48,6 +48,10 @@ spec:
               args:
                 {{- . | toYaml | nindent 16 }}
               {{- end }}
+              {{- with $config.env }}
+              env:
+                {{- . | toYaml | nindent 16 }}
+              {{- end }}
               {{- with $config.volumeMounts }}
               volumeMounts:
                 {{- . | toYaml | nindent 16 }}
